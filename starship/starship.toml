@@ -1,0 +1,8 @@
+[kubernetes]
+disabled = false
+
+[aws]
+force_display = true
+
+[java]
+disabled = true
