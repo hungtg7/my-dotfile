@@ -138,6 +138,11 @@ export GOPATH=/Users/141373/go
 # export PYO3_PYTHON=/opt/homebrew/bin//python3.9
 alias vi=nvim
 
+# remove all docker container
+function doccker_rm_all {
+    docker rm $(docker ps --filter status=exited -q)
+}
+
 # Seal secret for k8s
 function k_seal_add {
 	echo -n $1 \
