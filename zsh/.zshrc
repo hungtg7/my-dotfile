@@ -139,8 +139,13 @@ export GOPATH=/Users/141373/go
 alias vi=nvim
 
 # remove all docker container
-function doccker_rm_all {
+function docker_rm_all {
     docker rm $(docker ps --filter status=exited -q)
+}
+
+# remove all docker image
+function docker_rmi_all {
+    docker rmi -f $(docker images -aq)
 }
 
 # Seal secret for k8s
