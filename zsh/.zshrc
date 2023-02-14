@@ -145,7 +145,8 @@ function docker_rm_all {
 
 # remove all docker image
 function docker_rmi_all {
-    docker rmi -f $(docker images -aq)
+    docker stop $(docker ps --filter status=running -q)
+    docker rm $(docker ps --filter status=exited -q)
 }
 
 # Seal secret for k8s
