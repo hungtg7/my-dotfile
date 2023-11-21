@@ -29,26 +29,6 @@ config.keys = {
       mods = 'CTRL|SHIFT',
       action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
     },
-    {
-      key = 'h',
-      mods = 'CTRL',
-      action = act.ActivatePaneDirection 'Left',
-    },
-    {
-      key = 'l',
-      mods = 'CTRL',
-      action = act.ActivatePaneDirection 'Right',
-    },
-    {
-      key = 'k',
-      mods = 'CTRL',
-      action = act.ActivatePaneDirection 'Up',
-    },
-    {
-      key = 'j',
-      mods = 'CTRL',
-      action = act.ActivatePaneDirection 'Down',
-    },
     -- This will create a new split and run the `top` program inside it
     --[[ { ]]
     --[[   key = '%', ]]
@@ -68,5 +48,5 @@ for i = 1, 8 do
     action = act.ActivateWindow(i - 1),
   })
 end
-
+pane_focus_follows_mouse = true
 return config
