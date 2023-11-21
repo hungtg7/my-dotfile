@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm';
-
-return {
-  keys = {
+local act = wezterm.action
+local config = {}
+config.keys = {
     -- Make Option-Left equivalent to Alt-b which many line editors interpret as backward-word
     { key = "LeftArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bb" } },
     -- Make Option-Right equivalent to Alt-f; forward-word
@@ -18,5 +18,35 @@ return {
     { key = "H", mods = "SHIFT|CTRL", action = wezterm.action { Search = { CaseSensitiveString = "hash" } } },
     -- search for the string "hash" matching regardless of case
     { key = "H", mods = "SHIFT|CTRL", action = wezterm.action { Search = { CaseInSensitiveString = "hash" } } },
+    -- This will create a new split and run your default program inside it
+    {
+      key = '%',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+    },
+    {
+      key = '"',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+    },
+    -- This will create a new split and run the `top` program inside it
+    --[[ { ]]
+    --[[   key = '%', ]]
+    --[[   mods = 'CTRL|SHIFT|ALT', ]]
+    --[[   action = wezterm.action.SplitHorizontal { ]]
+    --[[     args = { 'top' }, ]]
+    --[[   }, ]]
+    --[[ }, ]]
   }
-}
+
+-- ActivateWindow
+for i = 1, 8 do
+  -- CMD+ALT + number to activate that window
+  table.insert(config.keys, {
+    key = tostring(i),
+    mods = 'CTRL',
+    action = act.ActivateWindow(i - 1),
+  })
+end
+
+return config
